@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 //     return response()->file(public_path('dist/index.html'));
 // })->where('any', '.*');
 
+Route::get('/', function() {
+    return view('index');
+});
+
 Route::get('/{project}/{any?}', function ($project) {
     $path = public_path("{$project}/index.html");
 
