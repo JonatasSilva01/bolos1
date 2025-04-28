@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{any}', function () {
-    return response()->file(public_path('dist/index.html'));
-})->where('any', '.*');
+// Route::get('/{any}', function () {
+//     return response()->file(public_path('dist/index.html'));
+// })->where('any', '.*');
+
+Route::get('/{project}/{any?}', function ($project) {
+    $path = public_path("{$project}/index.html");
+
+    if (file_exists($path)) {
+        return response()->file($path);
+    }
+
+    abort(404);
+})->where(['project' => '[a-zA-Z0-9_-]+', 'any' => '.*']);
