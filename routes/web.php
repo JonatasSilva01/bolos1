@@ -14,24 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// Aparece todos os produtos
-Route::get('/produtos', [ProdutoController::class, 'index']);
-
-// Formulário pra criar novo bolo
-Route::get('/produtos/criar', [ProdutoController::class, 'create']);
-
-// Salvar o novo bolo no banco
-Route::post('/produtos', [ProdutoController::class, 'store']);
-
-// Formulário para editar o bolo
-Route::get('/produtos/{produto}/editar', [ProdutoController::class, 'edit']);
-
-// Atualizar os dados do bolo
-Route::put('/produtos/{produto}', [ProdutoController::class, 'update']);
-
-// Excluir o bolo
-Route::delete('/produtos/{produto}', [ProdutoController::class, 'destroy']);
+Route::get('/{any}', function () {
+    return response()->file(public_path('dist/index.html'));
+})->where('any', '.*');
