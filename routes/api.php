@@ -25,3 +25,12 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
 
+
+// verifica se o usuário é uma Admin se sim ele vai acessar a aplicação inteira.
+Route::middleware(['auth:sanctum', 'is_admin'])->get('/admin', function () {
+    return response()->json([
+        'data' => true,
+        'message' => 'Área de admin'
+    ]);
+});
+
