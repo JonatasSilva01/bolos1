@@ -1,0 +1,35 @@
+name: 🚀 Deploy Automático
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout do código
+      uses: actions/checkout@v3
+
+    - name: 📡 Deploy via SSH
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_KEY }}
+        port: 22
+        script: |
+          cd ${{ secrets.DEPLOY_PATH }}
+
+          echo "Atualizando código..."
+          git pull origin main
+
+          echo "Subindo containers..."
+          docker-compose down
+          docker-compose up -d --build
+
+          echo "Rodando migrations..."
+          docker exec -it laravel_app php artisan migrate --force
+
+          echo "✅ Deploy finalizado!"
