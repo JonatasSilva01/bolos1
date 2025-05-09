@@ -1,7 +1,7 @@
 <h1 align="center">🚀 API Laravel Profissional com Docker</h1>
 
 <p align="center">
-  Projeto autoral desenvolvido por [Seu Nome], pronto para uso em produção ou como base de novos sistemas internos.
+  Projeto autoral desenvolvido por Jonatas silva dos santos, pronto para uso em produção ou como base de novos sistemas internos.
 </p>
 
 ---
